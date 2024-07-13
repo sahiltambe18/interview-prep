@@ -116,57 +116,6 @@
       );
       ```
 
-### Extended ER Features
-
-**Extended ER (EER) Model:**
-- An extension of the basic ER model to include more complex data modeling concepts.
-
-**Features:**
-
-**Generalization:**
-- Process of extracting common characteristics from multiple entities to create a generalized entity.
-- **Example:** Creating a general entity "Person" from entities "Employee" and "Customer".
-- **MySQL:**
-  ```sql
-  CREATE TABLE Person (
-      PersonID INT PRIMARY KEY,
-      Name VARCHAR(100),
-      DateOfBirth DATE
-  );
-
-  CREATE TABLE Employee (
-      EmployeeID INT PRIMARY KEY,
-      PersonID INT,
-      Position VARCHAR(100),
-      FOREIGN KEY (PersonID) REFERENCES Person(PersonID)
-  );
-
-  CREATE TABLE Customer (
-      CustomerID INT PRIMARY KEY,
-      PersonID INT,
-      MembershipLevel VARCHAR(50),
-      FOREIGN KEY (PersonID) REFERENCES Person(PersonID)
-  );
-  ```
-
-**Specialization:**
-- Process of creating new sub-entities from an existing entity based on some distinguishing characteristics.
-- **Example:** Specializing "Person" into "Employee" and "Customer".
-- **MySQL:** (as above)
-
-**Aggregation:**
-- A concept in which a relationship between entities is treated as a single higher-level entity.
-- **Example:** A "Project" is an aggregation of "Tasks".
-- **MySQL:**
-  ```sql
-  CREATE TABLE Task (
-      TaskID INT PRIMARY KEY,
-      TaskName VARCHAR(100),
-      ProjectID INT,
-      FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID)
-  );
-  ```
-
 **Composition:**
 - A form of association where a composite entity is created from other entities.
 - **Example:** A "Car" composed of entities like "Engine", "Wheels".
@@ -192,58 +141,6 @@
   );
   ```
 
-### Entity-Relationship Diagrams (ERD)
-
-**Definition:**
-- A graphical representation of an ER model, showing entities, attributes, and relationships.
-
-**Components:**
-1. **Entities:** Represented by rectangles.
-2. **Attributes:** Represented by ovals connected to their respective entities.
-3. **Relationships:** Represented by diamonds connected to entities with lines.
-4. **Primary Key:** Underlined attribute in the entity.
-5. **Cardinality:** Indicates the number of instances in a relationship (1:1, 1:N, M:N).
-
-**Example ERD for a MySQL Database:**
-
-- **Entities:** Employee, Department, Project.
-- **Attributes:** 
-  - Employee: EmployeeID (PK), Name, DateOfBirth, Position, DepartmentID (FK).
-  - Department: DepartmentID (PK), DepartmentName.
-  - Project: ProjectID (PK), ProjectName.
-- **Relationships:** 
-  - Employee works in a Department (1:N).
-  - Employee works on Projects (M:N via EmployeeProject).
-
-```sql
--- Example ERD in SQL:
-CREATE TABLE Department (
-    DepartmentID INT PRIMARY KEY,
-    DepartmentName VARCHAR(100)
-);
-
-CREATE TABLE Employee (
-    EmployeeID INT PRIMARY KEY,
-    Name VARCHAR(100),
-    DateOfBirth DATE,
-    Position VARCHAR(100),
-    DepartmentID INT,
-    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
-);
-
-CREATE TABLE Project (
-    ProjectID INT PRIMARY KEY,
-    ProjectName VARCHAR(100)
-);
-
-CREATE TABLE EmployeeProject (
-    EmployeeID INT,
-    ProjectID INT,
-    PRIMARY KEY (EmployeeID, ProjectID),
-    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID)
-);
-```
 
 ### Relational Model
 
