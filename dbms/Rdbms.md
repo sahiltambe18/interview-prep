@@ -30,99 +30,6 @@
    - **Definition:** Each row represents a single record in the table.
    - **Example:** A row in the "Students" table might be (1, 'John Doe', '2000-01-01').
 
-3. **Primary Key:**
-   - **Definition:** A unique identifier for each row in the table.
-   - **Example:** StudentID can be the primary key.
-   - **SQL Example:**
-     ```sql
-     CREATE TABLE Students (
-         StudentID INT PRIMARY KEY,
-         Name VARCHAR(100),
-         DateOfBirth DATE
-     );
-     ```
-
-4. **Foreign Key:**
-   - **Definition:** A column that creates a relationship between two tables.
-   - **Example:** CourseID in a "StudentCourses" table linking to CourseID in a "Courses" table.
-   - **SQL Example:**
-     ```sql
-     CREATE TABLE StudentCourses (
-         StudentID INT,
-         CourseID INT,
-         FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
-         FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
-     );
-     ```
-
-### Intension and Extension in a Database
-
-1. **Intension:**
-   - **Definition:** The schema of the database, which defines the structure, types, and constraints of the data.
-   - **Example:** The design of the "Students" table including its columns and data types.
-
-2. **Extension:**
-   - **Definition:** The actual data stored in the database at a given time.
-   - **Example:** The actual rows of data in the "Students" table.
-
-**Example Question:** What are intension and extension in a database context?
-- **Answer:** Intension refers to the schema or structure of the database, while extension refers to the actual data stored in the database at a particular moment.
-
-### Keys
-
-**Primary Key:**
-- **Definition:** Uniquely identifies each row in a table.
-- **Example:** EmployeeID in an "Employees" table.
-- **SQL Example:**
-  ```sql
-  CREATE TABLE Employees (
-      EmployeeID INT PRIMARY KEY,
-      Name VARCHAR(100),
-      DepartmentID INT
-  );
-  ```
-
-**Composite Key:**
-- **Definition:** A primary key that consists of two or more columns.
-- **Example:** (StudentID, CourseID) in a "StudentCourses" table.
-- **SQL Example:**
-  ```sql
-  CREATE TABLE StudentCourses (
-      StudentID INT,
-      CourseID INT,
-      PRIMARY KEY (StudentID, CourseID)
-  );
-  ```
-
-**Foreign Key:**
-- **Definition:** Links two tables together.
-- **Example:** DepartmentID in "Employees" referencing DepartmentID in "Departments".
-- **SQL Example:**
-  ```sql
-  CREATE TABLE Departments (
-      DepartmentID INT PRIMARY KEY,
-      DepartmentName VARCHAR(100)
-  );
-
-  CREATE TABLE Employees (
-      EmployeeID INT PRIMARY KEY,
-      Name VARCHAR(100),
-      DepartmentID INT,
-      FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
-  );
-  ```
-
-**Unique Key:**
-- **Definition:** Ensures all values in a column are unique.
-- **Example:** Email in an "Employees" table.
-- **SQL Example:**
-  ```sql
-  CREATE TABLE Employees (
-      EmployeeID INT PRIMARY KEY,
-      Name VARCHAR(100),
-      Email VARCHAR(100) UNIQUE
-  );
-  ```
 
 ### Normalization and its Types
 
@@ -175,17 +82,6 @@
       DepartmentName VARCHAR(100)
   );
   ```
-
-### Functional Dependency
-
-**Definition:**
-- Describes the relationship between attributes in a table. A functional dependency, denoted by X -> Y, means that if two rows have the same value for X, they must have the same value for Y.
-
-**Example:**
-- In a table of employees, EmployeeID -> Name means that each EmployeeID uniquely determines the Name.
-
-**Example Question:** What is functional dependency, and why is it important in normalization?
-- **Answer:** Functional dependency means that one attribute uniquely determines another. It is crucial for normalization because it helps to identify and eliminate redundancy in the database.
 
 ### Denormalization
 
